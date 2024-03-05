@@ -10,6 +10,7 @@ module.exports = defineConfig({
     }    
   },
   e2e: {
+    watchForFileChanges: false,
     baseUrl: 'https://sqlverifier-staging-08050d656f7a.herokuapp.com',
     setupNodeEvents(on, config) {
       on('task', {

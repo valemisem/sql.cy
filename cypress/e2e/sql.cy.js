@@ -9,10 +9,12 @@ describe('connect to Db', () => {
         `INSERT INTO Students (StudentID, FirstName, StudentGroup, City) VALUES
         (1, "Ivan", "02-2022", "Barcelona"),
         (2, "Maria", "03-2022", "Lala"),
-        (3, "Andrey", "02-2023", "Barca")`)
+        (3, "Andrey", "02-2023", "Barca"),
+        (4, "Alex", "02-2023", "Minsk"),
+        (5, "Aldy", "02-2023", "Madrid")`)
         .then((result) => {
             cy.log(JSON.stringify(result))
-            expect(result.affectedRows).to.equal(3)
+            expect(result.affectedRows).to.equal(5)
         })
     });
 
@@ -22,6 +24,14 @@ describe('connect to Db', () => {
         .then((result) => {
             cy.log(JSON.stringify(result))
             expect(result[0].FirstName).to.equal("Ivan")
+        })
+    });
+
+    it('select', () => {
+        cy.task ('queryDb',
+        `SELECT FirstName FROM Students WHERE StudentGroup = "02-2023"`)
+        .then((result) => {
+            cy.log(JSON.stringify(result))
         })
     });
 
